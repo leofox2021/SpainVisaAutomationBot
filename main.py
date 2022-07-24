@@ -1,4 +1,5 @@
 import os, sys, time, datetime, imaplib, email
+from colors import red, blue, cyan, magenta, yellow, green
 import undetected_chromedriver as uc
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -17,21 +18,26 @@ class MyChrome(uc.Chrome):
         pass
 
 
+def toLogTxt(message, ex):
+    with open('log.txt', 'w', encoding='utf-8') as log_txt:
+        print(red(ex))
+        print(yellow(message))
+        log_txt.write(f'\n{str(datetime.datetime.now(tz=None))[0:19]} - {ex}')
+        log_txt.write(f'\n\t{message}\n')
+
+
 def load_from_excel(driver):
-    register_fail = False
     all_customers.clear()
 
     try:
         book = load_workbook('USER_DATA.xlsx')
-    except Exception as ex:
+    except Exception as ex5:
         # os.system('cls' if os.name == 'nt' else 'clear')
-        print(ex)
-        print('Не удалось загрузить таблицу USER_DATA.')
-        print('Если вы нарушили целостность таблицы, пожалуйста переустановите программу.')
+        message0 = 'Не удалось загрузить таблицу USER_DATA. \n Если вы нарушили целостность таблицы, пожалуйста переустановите программу.'
+        toLogTxt(message0, ex5)
         driver.close()
+        sys.exit()
         # reportError('Не удалось загрузить таблицу USER_DATA. \nЕсли вы нарушили целостность таблицы, пожалуйста переустановите программу.')
-        register_fail = True
-        return register_fail
     else:
         sheet = book.active
         rows = sheet.rows
@@ -55,13 +61,6 @@ def load_from_excel(driver):
         all_customers.pop(0)
         global x
         x = len(all_customers)
-
-
-def toLogTxt(message, ex):
-    with open('log.txt', 'w', encoding='utf-8') as log_txt:
-        log_txt.write(message, '\n')
-    print(ex)
-    print(message)
 
 
 with open('context/members.txt', 'r+', encoding='utf-8') as members:
@@ -139,8 +138,8 @@ def login_page():
         visa_type.select_by_index(1)
         request_code = wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/form/section[1]/div/div/div[2]/div[2]/div[7]/div[2]/abbr/a'))).click()
         time.sleep(2)
-        print(e3)
-        print(ps3)
+        # print(e3)
+        # print(ps3)
         code = get_verification_code(e3, ps3, "imap.yandex.com")
         # print(code)
         code_field = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="otp"]'))).send_keys(code)
@@ -157,6 +156,12 @@ def login_page():
 
 login_page()
 login_page()
+print(green('Все файлы загружены успешно. \n'))
+print(blue('Номер телефона: '), magenta(f'+7{p3}'))
+print(blue('EMAIL: '), magenta(e3))
+print(blue('Города подачи: '), magenta(c3))
+print(blue('Количество человек: '), magenta(m3), '\n')
+
 # print(d.current_url)
 # fillcaptcha(solver, 'https://blsspain-russia.com/moscow/appointment_family.php', wait)
 
@@ -164,7 +169,7 @@ login_page()
 booking_date = g.pick_booking_date()
 if booking_date == False:
     message4 = "На данный момент нет свободных мест."
-    toLogTxt(message4, ex)
+    toLogTxt(message4, 'No book date found.')
     d.close()
     sys.exit()
 else:
