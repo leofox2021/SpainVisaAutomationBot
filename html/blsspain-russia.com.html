@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://blsspain-russia.com/moscow/appointment_family.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head><body onload="getRows();" style="">﻿
+<meta name="description" content="blsspain-russia.com">
+<meta name="keywords" content="blsspain-russia.com">
+<meta name="google-site-verification" content="zD9yBAqi46iEES3bx6S_B3aDcu4klvACRwANIg5BWwk">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<title>blsspain-russia.com</title>
+<link rel="shortcut icon" href="https://blsspain-russia.com/moscow/images/favicon.ico">
+
+<link href="./blsspain-russia.com_files/style.css" type="text/css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="./blsspain-russia.com_files/mobile-responsive.css">
+
+<script async="" src="./blsspain-russia.com_files/analytics.js.download"></script><script src="./blsspain-russia.com_files/jquery-1.11.0.min.js.download"></script>
+
+<script type="text/javascript" src="./blsspain-russia.com_files/bootstrap-datepicker.js.download"></script>
+
+<script>
+
+$(document).ready(function() {
+
+$(".menuIcon").click(function(){
+$(".navigationPanel").slideToggle();
+
+});
+
+});	
+
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="./blsspain-russia.com_files/flexdropdown.css">
+
+<script type="text/javascript" src="./blsspain-russia.com_files/jquery-1.11.0.min.js.download"></script>
+
+<script type="text/javascript" src="./blsspain-russia.com_files/flexdropdown.js.download">
+
+/***********************************************
+
+* Flex Level Drop Down Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+
+* This notice MUST stay intact for legal use
+
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for this script and 100s more
+
+***********************************************/
+
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89732014-1', 'auto');
+  ga('send', 'pageview');
+
+</script><link rel="stylesheet" type="text/css" href="./blsspain-russia.com_files/calendar.css">
+<style>
+span{ float:none;}
+.popupPanel{background:rgba(255,255,255,0.8); width:100%; height:100%; position:fixed; left:0px; right:0px; bottom:0px; top:0px; z-index:10000;}
+.imageDiv{width:32px; height:32px; position:fixed; left:0px; right:0px; bottom:0px; top:0px; margin:auto;}
+tr.hid_tr{ display:none; }
+</style>
+<script>
+var flagCounter = 1;
+function ValidateEmail(email) {
+var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+return expr.test(email);
+}
+
+function removeError(id)
+{
+  $("#"+id).removeClass('error');
+  $("#"+id).removeClass("placeholderColor");
+}
+
+
+function validatePassport(){
+	
+	var passpostNos = Array();
+	var count = 0;
+	var alertMsg = '<span class="pass-info" style="position:absolute; bottom: -5px; left: 5px; color:yellow; font-size:11px;">Passport No. Already Entered</span>';
+	
+	$.each($("input[name='passport_number[]']"), function(i, e){
+		var passport = $(e).val();
+		$("input[name='passport_number[]']:eq("+i+")").removeClass('error');
+		$("input[name='passport_number[]']:eq("+i+")").parent('td').find('span.pass-info').remove();
+		
+		if($.inArray(passport,passpostNos) == -1){
+			passpostNos.push(passport);
+		}else{
+			count++;
+			$("input[name='passport_number[]']:eq("+i+")").addClass('error');
+			$("input[name='passport_number[]']:eq("+i+")").parent('td').append(alertMsg);	
+		}
+	});
+	
+	if(count > 0){
+		return false;	
+	}
+	
+	return true;
+	
+	
+}
+
+
+function validateTimeSlot(evt){
+	
+	$("input[name='save']").removeAttr("disabled");
+	$("select[name='app_time[]']").removeClass('error');
+	$("select[name='app_time[]']").parent('td').find('span.time-info').remove();
+	
+	var appServiceType = "Normal";
+	var appDate = $("#app_date").val() || 0;
+	var appTime = $(evt).val() || 0;
+	var centerId = "1" || 0;
+	var visa = "" || "";
+	var timeSlots = Array();
+	var count = 0;
+	var alertMsg = '<span class="time-info" style="position:absolute; bottom: 44px; right: 4px; color:yellow; font-size:11px;">' +  appTime +' [Time Slot Full]</span>';
+	var $that = $(evt)
+	
+	/*$.each($("select[name='app_time[]']"), function(i, e){
+		var timeSlot = $(e).val();
+		$("select[name='app_time[]']:eq("+i+")").removeClass('error');
+		$("select[name='app_time[]']:eq("+i+")").parent('td').find('span.time-info').remove();
+		
+		if($.inArray(timeSlot,timeSlots) == -1){
+			timeSlots.push(timeSlot);
+		}else{
+			count++;
+			$("select[name='app_time[]']:eq("+i+")").addClass('error');
+			$("select[name='app_time[]']:eq("+i+")").parent('td').append(alertMsg);	
+		}
+	});
+		
+	if(count > 0){
+		return false;	
+	}
+	
+	return true;*/
+	
+	/*$.each($("select[name='app_time[]']"), function(i, e){
+		var timeSlot = $(e).val();
+		if($.inArray(timeSlot,timeSlots) == -1){
+			timeSlots.push(timeSlot);
+		}
+	});*/
+	
+	$.ajax({
+		url: 'ajax.php',
+		type: 'POST',
+		async: false,
+		data: {'gofor' : 'checkTimeSlot', 'appDate' : appDate, 'appTime' : appTime, "centerId" : centerId,"appServiceType" : appServiceType },
+		beforeSend: function(){
+			$("#overlay").show({
+			}, 1500);
+			$("select[name='app_time[]']").removeClass('error');
+			$("select[name='app_time[]']").parent('td').find('span.time-info').remove();
+			$("input[name='save']").attr("disabled", "disabled");
+		},
+		success: function(data){
+			$("input[name='save']").removeAttr("disabled");
+			var resp = JSON.parse(data);
+			var searchCount = 1;
+			var arrayFilter = Array();
+			flagCounter = parseInt(resp.booking_details.total_booked);	
+					 
+			var find_slot_capacity = resp.slot_details.slot_capacity; 
+			var currentTime = $that.val();
+			
+			if(visa.trim() != ""){
+				find_slot_capacity =  parseInt(resp.slot_details.slot_capacity) + parseInt(resp.slot_details.slot_capacity_extra);
+			}
+			
+			$.each($("select[name='app_time[]']"), function(index, element){	
+				if($(element).val() == resp.booking_details.appTime && find_slot_capacity >= resp.booking_details.total_booked){
+					flagCounter++;
+				}
+			});
+														
+			if( flagCounter > find_slot_capacity ){
+				count++;
+				$that.addClass('error');
+				$that.parent('td').append(alertMsg);	
+				$that.val('');
+				flagCounter--;
+			}else{
+				$that.removeClass('error');
+				$that.parent('td').find('span.time-info').remove();
+			}
+			$("#overlay").hide(1500);
+		}
+		
+	});
+		
+	if(count > 0){
+		return false;	
+	}
+	
+	return true;
+	
+}
+	  
+function validateFrm(){
+var flags=0;
+    $.each($(".validate"), function(index, element){
+	if($(element).val()!=""){
+		$(element).removeClass('error');	
+	  }else{
+		flags=1;
+		$(element).addClass("error");
+	  }
+	});
+	/*if ($('#terms').is(':checked')) {
+		$('#termsborder').removeClass('error');
+		$('#aterms').css('color','white');
+	}
+	else {
+		flags=1;
+		$('#termsborder').addClass('error');
+		$('#aterms').css('color','red');
+	}*/
+	
+	
+	if(flags==1){
+	  return false;
+	}else{	
+		return confirm("Please confirm all the information before submitting.");
+	}
+	
+	var a = validatePassport();
+	var b = true; //validateTimeSlot();
+	
+	if(a === true && b === true){
+		return true;	
+	}
+	
+	return false;
+	
+}
+
+function showLoader()
+{
+    $("#overlay").show({
+			}, 1500);
+}
+function getRows(){
+	      var slot = "<option value='09:45 - 10:00'>09:45 - 10:00</option><option value='10:15 - 10:30'>10:15 - 10:30</option><option value='10:30 - 10:45'>10:30 - 10:45</option><option value='10:45 - 11:00'>10:45 - 11:00</option><option value='11:00 - 11:15'>11:00 - 11:15</option><option value='11:15 - 11:30'>11:15 - 11:30</option><option value='11:30 - 11:45'>11:30 - 11:45</option><option value='11:45 - 12:00'>11:45 - 12:00</option><option value='12:00 - 12:15'>12:00 - 12:15</option><option value='12:15 - 12:30'>12:15 - 12:30</option><option value='12:30 - 12:45'>12:30 - 12:45</option><option value='12:45 - 13:00'>12:45 - 13:00</option><option value='13:00 - 13:15'>13:00 - 13:15</option><option value='13:15 - 13:30'>13:15 - 13:30</option><option value='13:30 - 13:45'>13:30 - 13:45</option><option value='13:45 - 14:00'>13:45 - 14:00</option><option value='14:00 - 14:15'>14:00 - 14:15</option><option value='14:15 - 14:30'>14:15 - 14:30</option><option value='14:30 - 14:45'>14:30 - 14:45</option><option value='14:45 - 15:00'>14:45 - 15:00</option><option value='15:00 - 15:15'>15:00 - 15:15</option><option value='15:15 - 15:30'>15:15 - 15:30</option><option value='15:30 - 15:45'>15:30 - 15:45</option><option value='15:45 - 16:00'>15:45 - 16:00</option>";
+          var nationality = "<option value=16 >Австралия</option><option value=17 >Австрия</option><option value=18 >Азербайджан</option><option value=6 >Албания</option><option value=62 >Алжир</option><option value=12 >Американское Самоа</option><option value=4 >Ангилья</option><option value=3 >Ангола</option><option value=7 >Андорра</option><option value=13 >Антарктида</option><option value=15 >Антигуа и Барбуда</option><option value=10 >Аргентина</option><option value=11 >Армения</option><option value=1 >Аруба</option><option value=2 >Афганистан</option><option value=26 >Багамские острова</option><option value=23 >Бангладеш</option><option value=33 >Барбадос</option><option value=25 >Бахрейн</option><option value=28 >Беларусь</option><option value=29 >Белиз</option><option value=20 >Бельгия</option><option value=21 >Бенин</option><option value=30 >Бермудские Острова</option><option value=24 >Болгария</option><option value=31 >Боливия</option><option value=27 >Босния</option><option value=37 >Ботсвана</option><option value=32 >Бразилия</option><option value=34 >Бруней</option><option value=22 >Буркина – Фасо</option><option value=19 >Бурунди</option><option value=35 >Бутан</option><option value=239 >Вануату</option><option value=233 >Ватикан</option><option value=78 >Великобриитания</option><option value=99 >Венгрия</option><option value=235 >Венесуэла</option><option value=251 >Виргинские Острова</option><option value=218 >Восточный Тимор</option><option value=238 >Вьетнам </option><option value=77 >Габон</option><option value=98 >Гаити</option><option value=93 >Гайана</option><option value=84 >Гамбия</option><option value=80 >Гана</option><option value=83 >Гваделупе</option><option value=90 >Гватемала</option><option value=82 >Гвинея</option><option value=85 >Гвинея-Бисау</option><option value=57 >Германия</option><option value=81 >Гибралтар</option><option value=96 >Гондурас</option><option value=249 >Гонконг</option><option value=88 >Гренада</option><option value=89 >Гренландия</option><option value=87 >Греция</option><option value=79 >Грузия</option><option value=60 >Дания</option><option value=248 >Демократическая Республика Конго</option><option value=58 >Джибути</option><option value=59 >Доминика</option><option value=61 >Доминиканская Республика</option><option value=64 >Египет</option><option value=246 >Замбия</option><option value=66 >Западная Сахара</option><option value=247 >Зимбабве</option><option value=107 >Израиль</option><option value=101 >Индия</option><option value=100 >Индонезия</option><option value=110 >Иордания</option><option value=105 >Ирак</option><option value=104 >Иран</option><option value=103 >Ирландия</option><option value=106 >Исландия</option><option value=67 >испания</option><option value=108 >Италия</option><option value=243 >Йемен </option><option value=50 >Кабо-Верде</option><option value=112 >Казахстан</option><option value=115 >Камбоджа</option><option value=45 >Камерун</option><option value=39 >Канада</option><option value=182 >Катар</option><option value=113 >Кения</option><option value=55 >Кипр</option><option value=116 >Кирибати</option><option value=43 >Китай</option><option value=48 >Колумбия</option><option value=49 >Коморы</option><option value=51 >Коста-Рика</option><option value=44 >Кот-д´Ивуар</option><option value=52 >Куба</option><option value=119 >Кувейт</option><option value=114 >Кыргызстан</option><option value=120 >Лаос</option><option value=130 >Латвия</option><option value=127 >Лесото</option><option value=122 >Либерия</option><option value=121 >Ливан</option><option value=123 >Ливия</option><option value=128 >Литва</option><option value=125 >Лихтенштейн</option><option value=129 >Люксембург</option><option value=150 >Маврикий</option><option value=147 >Мавритания</option><option value=135 >Мадагаскар</option><option value=153 >Майотта</option><option value=250 >Макао</option><option value=139 >Македония</option><option value=151 >Малави</option><option value=152 >Малайзия</option><option value=140 >Мали</option><option value=136 >Мальдивы</option><option value=141 >Мальта</option><option value=149 >Мартиника</option><option value=138 >Маршалловы Острова</option><option value=137 >Мексика</option><option value=146 >Мозамбик</option><option value=134 >Молдова</option><option value=133 >Монако</option><option value=144 >Монголия</option><option value=148 >Монтсеррат</option><option value=132 >Морокко</option><option value=142 >Мьянмар</option><option value=154 >Намибия</option><option value=164 >Науру</option><option value=8 >Недерландские Антильские Острова</option><option value=161 >Недерланды</option><option value=163 >Непал</option><option value=156 >Нигер</option><option value=158 >Нигерия</option><option value=159 >Никарагуа</option><option value=166 >Новая Зеландия</option><option value=162 >Норвегия</option><option value=167 >Оман</option><option value=192 >Остров Святой Елены</option><option value=54 >Острова Кайман</option><option value=47 >Острова Кука</option><option value=168 >Пакистан</option><option value=173 >Палау</option><option value=180 >Палестина</option><option value=169 >Панама</option><option value=174 >Папуа Новая Гвинея</option><option value=179 >Парагвай</option><option value=171 >Перу</option><option value=175 >Польша</option><option value=178 >Португалия</option><option value=176 >Пуэрто-Рико</option><option value=46 >Республика Конго</option><option value=183 >Реюньон</option><option value=185 selected>Российская Федерация</option><option value=186 >Руанда</option><option value=184 >Румыния</option><option value=196 >Сальвадор</option><option value=241 >Самоа</option><option value=197 >Сан-Марино</option><option value=202 >Сан-Томе и Принсипи</option><option value=187 >Саудовска Арабия</option><option value=118 >Северная Корея</option><option value=177 >Северная Корея</option><option value=208 >Сейшельские острова</option><option value=189 >Сенегал</option><option value=234 >Сент-Винсент и Гренадины </option><option value=117 >Сент-Китс и Невис</option><option value=124 >Сент-Люсия</option><option value=200 >Сербия</option><option value=190 >Сингапур</option><option value=209 >Сирия</option><option value=204 >Словакия</option><option value=205 >Словения</option><option value=9 >Соединенные Арабские Эмираты</option><option value=231 >Соединенные Штаты Америки</option><option value=194 >Соломоновы острова</option><option value=198 >Сомали</option><option value=188 >Судан</option><option value=203 >Суринам</option><option value=195 >Сьерра-Леоне</option><option value=215 >Таджикистан</option><option value=214 >Таиланд</option><option value=224 >Тайвань</option><option value=225 >Танзания</option><option value=211 >Теркс и Кайкос</option><option value=213 >Того</option><option value=219 >Тонга</option><option value=220 >Тринидад и Тобаго</option><option value=223 >Тувалу</option><option value=221 >Тунис</option><option value=217 >Туркменистан</option><option value=222 >Турция</option><option value=226 >Уганда</option><option value=232 >Узбекистан</option><option value=227 >Украина</option><option value=230 >Уругвай</option><option value=75 >Федеративные штаты микронезии</option><option value=71 >Фиджи</option><option value=172 >Филиппны</option><option value=70 >Финляндия</option><option value=73 >Франция</option><option value=91 >Французская Гвиана</option><option value=181 >Французская Полинезия</option><option value=14 >Французскиие Южные и Антарктические Территории</option><option value=97 >Хорватия</option><option value=38 >Центральноафриканская республика</option><option value=212 >Чад</option><option value=143 >Черногория</option><option value=56 >Чешская Республика</option><option value=42 >Чили</option><option value=41 >Швейцария</option><option value=207 >Швейцария</option><option value=206 >Швеция</option><option value=252 >Шотландия</option><option value=193 >Шпицберген и Ян-Майен</option><option value=126 >Шри-Ланка</option><option value=63 >Эквадор</option><option value=86 >Экваториальная Гвинея</option><option value=65 >Эритрея</option><option value=68 >Эстония</option><option value=69 >Эфиопия</option><option value=191 >Южная Георгия и Южные Сандвичевы Острова </option><option value=245 >Южно-Африканская Республика</option><option value=201 >Южный Судан</option><option value=109 >Ямайка</option><option value=111 >Япония</option>";
+		  var visa = "<option value=12>Бизнес</option><option value=13>Водители </option><option value=14>Учёба сроком менее 90 дней</option><option value=15>Культурные мероприятия</option><option value=17>Владельцы недвижимости</option><option value=18>Моряки</option><option value=24>5 лет - Шенгенская виза С</option><option value=25>3 года - Шенгенская виза С</option><option value=26>2 года - Шенгенская виза С</option><option value=27>Родственники граждан Испании или ЕС</option><option value=31>1 года - Шенгенская виза С</option>";
+		  var passport = "<option value='01' selected>Заграничный паспорт </option><option value='08' >Паспорт иностранного гражданина</option><option value='11' >Паспорт ООН</option><option value='05' >Служебный паспорт</option>";
+		  var juri = ""
+          var max_application_number = 2;
+          var count = $("#mainDiv .childDiv").size();
+          if(document.getElementById("number_of_application").value==''){
+              document.getElementById("number_of_application").value=1;
+          }
+          var requested = parseInt(document.getElementById("number_of_application").value);
+          if(requested>1){
+              $("#removeButton").show();
+              $("#first_application").show();
+          }else{
+              $("#removeButton").hide();
+              $("#first_application").hide();
+          }
+          if(requested<=max_application_number){ 
+              if(requested>0){
+                  if (requested > count) {
+					   var firstname = [];
+					   var last_name = [];
+				       var date_of_birth = [];
+				       var passportType = [];
+				       var passport_number = [];
+				       var pptIssueDate = [];
+				       var pptExpiryDate = [];
+				       var pptIssuePalace = [];
+                      for(i=count; i<requested; i++) {
+						  var j= i+ 1;
+						  firstname[i] = "";
+						  last_name[i] = "";
+						  date_of_birth[i] = "";
+						  passportType[i] = "";
+						  passport_number[i] = "";
+						  pptIssueDate[i] = "";
+						  pptExpiryDate[i] = "";
+						  pptIssuePalace[i] = "";
+						  						    if( typeof firstname[i] === 'undefined' )
+						    {
+								firstname[i]="";
+							}
+							if( typeof last_name[i] === 'undefined' )
+						    {
+								last_name[i]="";
+							}
+							if( typeof date_of_birth[i] === 'undefined' )
+						    {
+								date_of_birth[i]="";
+							}
+							if( typeof passportType[i] === 'undefined' )
+						    {
+								passportType[i]="";
+							}
+							if( typeof passport_number[i] === 'undefined' )
+						    {
+								passport_number[i]="";
+							}
+							if( typeof pptIssueDate[i] === 'undefined' )
+						    {
+								pptIssueDate[i]="";
+							}
+							if( typeof pptExpiryDate[i] === 'undefined' )
+						    {
+								pptExpiryDate[i]="";
+							}
+							if( typeof pptIssuePalace[i] === 'undefined' || pptIssuePalace[i] == "")
+						    {
+								pptIssuePalace[i]= "";
+							}
+							
+                          var data = "<div class='row marginBottom childDiv' id='mainDiv-"+j+"'><div class='row marginBottom'><div class='lineheightExtra'>Applicant "+j+"</div></div><table><tr><td width='16%' align='left' valign='middle'  class='captionpnl'><select name='app_time[]' id='app_time-"+j+"' onChange='removeError(this.id);' style='width:'' class='form-control-input validate'><option value='' selected='selected'>Время посещения</option>"+slot+"</select><div class='caption'>Время посещения</div></td><td width='16%' align='left' valign='middle'  class='captionpnl'><select name='VisaTypeId[]' id='VisaTypeId-"+j+"' onChange='removeError(this.id);' style='width:'' class='form-control-input validate vtype'><option value='' selected='selected'>Тип визы</option>"+visa+"</select><div class='caption'>Тип визы</div></td><td width='16%' align='left' valign='middle' class='captionpnl'><input type='text' name='first_name[]' id='first_name-"+j+"' onFocus='removeError(this.id);' placeholder='First Name'  class='form-control-input validate' value='"+firstname[i]+"' /><div class='caption'>Имя</div></td><td width='16%' align='left' valign='middle' class='captionpnl'><input type='text' placeholder='Last Name' name='last_name[]' id='last_name-"+j+"' onFocus='removeError(this.id);' class='form-control-input validate' value='"+last_name[i]+"' /><div class='caption'>Фамилия</div></td><td width='16%' align='left' valign='middle' class='captionpnl'><input type='text' placeholder='Date of Birth' name='date_of_birth[]' id='date_of_birth-"+j+"' onFocus='removeError(this.id);' class='form-control-input date_of_birth validate' readonly value='"+date_of_birth[i]+"'><div class='caption'>Дата рождения</div></td><td width='16%' align='left' valign='middle' class='captionpnl'><select name='nationality[]' id='nationality-"+j+"' onChange='removeError(this.id);'  class='form-control-input validate'><option value='' selected='selected'>Гражданство</option>"+nationality+"</select><div class='caption'>Гражданство</div></td></tr><tr><td width='16%' align='left' valign='middle' class='captionpnl'><select name='passportType[]' id='passportType-"+j+"' onFocus='removeError(this.id);'  class='form-control-input validate'><option value='' selected='selected'>Тип паспорта </option>"+passport+"</select><div class='caption'>Тип паспорта</div></td><td width='16%' align='left' valign='middle' class='captionpnl'><input type='text' placeholder='Passport No' name='passport_number[]' id='passport_number-"+j+"' onFocus='removeError(this.id);'  class='form-control-input validate' value='"+passport_number[i]+"' /><div class='caption'>Номер паспорта</div></td><td width='16%' align='left' valign='middle' class='captionpnl'><input type='text' placeholder='Issue Date' name='pptIssueDate[]' class='form-control-input pptIssueDate validate'  id='pptIssueDate-"+j+"' onFocus='removeError(this.id);' readonly value='"+pptIssueDate[i]+"'><div class='caption'>Дата выдачи паспорта</div></td><td width='16%' align='left' valign='middle' class='captionpnl'><input type='text' placeholder='Expiry Date' name='pptExpiryDate[]' class='form-control-input passport_validate_till validate' id='pptExpiryDate-"+j+"' onFocus='removeError(this.id);' readonly value='"+pptExpiryDate[i]+"'><div class='caption'>Паспорт действителен до</div></td><td width='16%' align='left' valign='middle' class='captionpnl'><input type='text' placeholder='Issue Place' name='pptIssuePalace[]' class='form-control-input validate'  id='pptIssuePalace-"+j+"' onFocus='removeError(this.id);' value='"+pptIssuePalace[i]+"' ><div class='caption'>Место выдачи паспорта</div></td></tr></table></div>";
+                          var $ctrl = data; 
+                          $("#mainDiv").append($ctrl);
+						  var dtJS  = '2022-07-06';
+						  $('.date_of_birth').datepicker({
+								format: "yyyy-mm-dd",
+								endDate: new Date(dtJS),
+								startDate: '-100y',
+								autoclose: true,
+								startView: 2
+						  });
+						  $('.pptIssueDate').datepicker({
+								format: "yyyy-mm-dd",
+								endDate: new Date(dtJS),
+								startDate: '-100y',
+								autoclose: true,
+								startView: 2
+							});
+						  $('.passport_validate_till').datepicker({
+								format: "yyyy-mm-dd",
+								startDate: new Date(dtJS),
+								autoclose: true,
+								startView: 2
+						  });
+                      }
+                  }
+                  else if (requested < count) {
+                      var x = requested - 1;
+                      $("#mainDiv .childDiv:gt(" + x + ")").remove();
+                  }
+              }else{
+                  document.getElementById("number_of_application").value=1;
+                  getRows();
+              }
+          }else{
+              document.getElementById("number_of_application").value=max_application_number;
+              getRows();
+          }
+		  
+		  var counter = document.getElementById("number_of_application").value;
+		  
+		  var appTime = null;
+		  var VisaTypeId = null;
+		  var nationalityId = null;
+		  var passportId = null;
+		  for(m=1; m<=counter; m++) {
+			$('#app_time-'+[m]+' option[value="'+appTime[m-1]+'"]').attr('selected','selected');
+			$('#VisaTypeId-'+[m]+' option[value='+VisaTypeId[m-1]+']').attr('selected','selected'); 
+			$('#nationality-'+[m]+' option[value='+nationalityId[m-1]+']').attr('selected','selected');
+			$('#passportType-'+[m]+' option[value='+passportId[m-1]+']').attr('selected','selected'); 
+		  }
+      }
+</script>
+
+
+
+
+<!-- header section -->
+<style>
+#sidebar {
+    position: fixed;
+    left: 0;
+    top: 150px;
+    z-index: 1000;
+}
+.followbg{
+background: #d8d8d8;
+padding: 5px 6px;
+color: #5a5a5a;
+text-align: center;
+font-size: 12px;
+}
+</style>
+<header class="row headerSection pull_left">
+<!-- POP UP -->
+<script>
+function setCookie()
+{
+     $.ajax({
+        type: "POST",
+        data: "gofor=setCookie",
+        url: "cookie_ajax.php",
+        success: function(response)
+        {
+			document.getElementById("popup").style.display = "none";
+        }
+    });	
+}
+</script>
+<!-- POP UP -->
+<div class="wrap">
+<div class="row borderBottom">
+<h1 class="logoSection"><a href="https://blsspain-russia.com/moscow/index.php"><img src="./blsspain-russia.com_files/bls-logo.png" width="" height="" alt="BLS Logo" title="BLS Logo"></a></h1>
+<div class="menuIcon"><img src="./blsspain-russia.com_files/mobicon.png" width="20" height="20"></div>
+
+<div class="paddingInBox marginTop"><span class="padding-sm-updwn followbg">Follow Us</span> <a href="https://www.facebook.com/blsinternationalservices/" target="_blank"><img src="./blsspain-russia.com_files/fb.png" class="marginLeft pull_right"></a> <a href="https://twitter.com/blsintlservices" target="_blank"><img src="./blsspain-russia.com_files/twitter.png" class="marginLeft pull_right"></a> <a href="https://www.instagram.com/blsinternationalservicesltd/" target="_blank"><img src="./blsspain-russia.com_files/insta.png" class="marginLeft pull_right"></a> <a href="https://in.linkedin.com/company/bls-international-services-ltd" target="_blank"><img src="./blsspain-russia.com_files/Linkedin.png" class="marginLeft pull_right"></a>
+<a href="https://vk.com/blsspainrussia" target="_blank"><img src="./blsspain-russia.com_files/vk.png" class="marginLeft pull_right" style="width: 19px;"></a></div>
+
+<div class="pull_right paddingInBox paddingRightNone paddingBottomNone">
+<div class="pull_right padding-sm paddingRightNone paddingTopNone">
+<h4 class="marginRight paddingRight baseColor label">Подать заявку на визу в <br>
+Испанию в Москве <img src="./blsspain-russia.com_files/flag.jpg" class="pull_right  marginLeft borderAll"></h4>
+<div class="marginLeft paddingLeft lineheightExtra">
+<a href="https://blsspain-russia.com/moscow/english/index.php" class="padding-sm"><span class="font11 borderRight paddingRight black">English</span></a>
+<a href="https://blsspain-russia.com/moscow/spanish/index.php" class="padding-sm"><span class="font11 borderRight paddingRight black">Español</span></a>
+<a href="https://blsspain-russia.com/moscow/appointment_family.php#" class="padding-sm"><span class="font11 black">Pусский</span></a>
+</div>
+</div>
+</div>
+</div>
+
+<nav class="navigationPanel">
+<a href="https://blsspain-russia.com/moscow/index.php"><img src="./blsspain-russia.com_files/home.png" width="18" height="18"></a>
+<a href="https://blsspain-russia.com/moscow/appointment_family.php#" data-flexmenu="flexmenu1">Тип визы</a>
+<a href="https://blsspain-russia.com/moscow/appointment_family.php#" data-flexmenu="flexmenu3">Предварительная запись</a>
+<a href="https://blsspain-russia.com/moscow/appointment_family.php#" data-flexmenu="flexmenu2">Общая информация</a>
+<a href="https://blsspain-russia.com/moscow/track_application.php">Отследите ваш паспорт</a>
+<a href="https://blsspain-russia.com/moscow/faq.php">Вопросы-Ответы</a>
+<a href="https://blsspain-russia.com/moscow/contact.php">Контактная информация</a>
+<a href="https://blsspain-russia.com/moscow/mobile-biometric.php" title="подать документы из дома"><strong class="blink"><span>подать...</span></strong></a>
+<!--HTML for Flex Drop Down Menu 1-->
+
+<!--HTML for Flex Drop Down Menu 1-->
+
+<!--HTML for Flex Drop Down Menu 3-->
+
+<!--HTML for Flex Drop Down Menu 3-->
+
+
+</nav>
+</div>
+</header><!-- /header section -->
+
+
+<!-- body Panel -->
+<div class="row innerbodypanel">
+
+<section class="row aboutUsPanel">
+<div class="wrap">
+<div class="row">
+<h1 class="row fontweightNone alignCenter black marginBottom">Предварительная запись</h1>
+<div class="row blueBG paddingInBoxExtra roundCornerExtra" style="color:#FFF">
+<form name="applicantBooking2" id="applicantBooking2" action="https://blsspain-russia.com/moscow/appointment_family.php" method="post" onsubmit="return validateFrm();" autocomplete="off">
+<table width="100%" border="0" cellpadding="5" cellspacing="0" align="center">
+    <tbody><tr>
+    	<td align="center" valign="top">
+        	<table width="100%" align="center" cellpadding="0" cellspacing="0" class="">
+                <tbody><tr id="app_date_tr" height="30">
+                    <td width="20%" class="styleBlack" style="padding-left:10px;">
+                        Дата посещения: <span style="color:#F00">*</span>
+                    </td>
+                    <td colspan="2">
+                    <input type="text" readonly="" class="form-control-input app_date validate" style="width: 260px;" id="app_date" name="app_date" placeholder="YYYY-MM-DD" onchange="this.form.submit();showLoader();" value="2022-07-07">
+                    </td>
+                </tr>
+                <input type="hidden" name="loc_selected" id="loc_selected" value="1">
+                <input type="hidden" name="mission_selected" id="mission_selected" value="6">
+                <input type="hidden" name="agentId" id="agentId" value="">
+                <tr>
+                  <td colspan="3" height="5"></td>
+                </tr>
+                <tr id="pn_tr" height="30">
+                    <td valign="middle" class="styleBlack" width="34%" style="padding-left:10px;">
+                        дата поездки: <span style="color:#F00">*</span>
+                    </td>
+
+                    <td width="66%" align="left" valign="middle">
+                       <input type="text" name="travelDate" class="form-control-input" style="width: 260px;" id="travelDate" value="" readonly="">
+                    </td>
+                </tr>
+                <tr id="loc_tr">
+                    <td width="20%" class="" style="padding-left:10px; color:#FFF;">
+                        Электронная почта : <span style="color:#F00">*</span><br>
+                    </td>
+                    <td colspan="2">
+                    <input type="text" name="email" id="email" style="width: 260px;" class="form-control-input" value="cfox9@yandex.ru" readonly="">
+                    </td>
+                </tr>
+                <tr id="loc_tr">
+                    <td width="20%" class="" style="padding-left:10px; color:#FFF;">
+                        Контактный телефон : <span style="color:#F00">*</span><br>
+                    </td>
+                    <td colspan="2">
+                    <input type="text" name="phone_code" id="phone_code" class="form-control-input" value="7" style="width:50px" readonly="">
+                    <input type="text" name="phone" id="phone" class="form-control-input marginLeft" value="9081022832" style="width:200px" readonly="">
+                    </td>
+                </tr>
+                <tr id="loc_tr">
+                    <td width="20%" class="" style="padding-left:10px; color:#FFF;">
+                        Сколько членов в вашей семье : <span style="color:#F00">*</span><br>
+                    </td>
+                    <td colspan="2">
+                    <input type="number" name="number_of_application" id="number_of_application" min="1" max="20" value="2" class="form-control-input validate" onkeyup="getRows();" onchange="getRows();" onfocus="removeError(this.id);" style="width:260px;">
+                    </td>
+                </tr>
+                <tr>
+                  <td colspan="3" height="5"></td>
+                </tr>
+                <tr id="slot_tr" height="30">
+                    <td colspan="3" align="center" class="styleBlack" style="padding-left:10px;">
+                      <strong style="font-size:16px"> ДЕТАЛИ ЗАЯВИТЕЛЯ</strong></td>
+                  </tr>
+                <tr>
+                  <td colspan="3" height="5">
+                  <div id="mainDiv">
+                    <div class="row marginBottom childDiv" id="mainDiv-1">
+                    <div class="row marginBottom" style="" id="first_application">Applicant 1</div> 
+                        <table>
+                        <tbody><tr>
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <select class="form-control-input validate" name="app_time[]" id="app_time-1">					 
+                        <option value="" selected="selected">Время посещения</option>
+                        <option value="09:45 - 10:00">09:45 - 10:00</option><option value="10:15 - 10:30">10:15 - 10:30</option><option value="10:30 - 10:45">10:30 - 10:45</option><option value="10:45 - 11:00">10:45 - 11:00</option><option value="11:00 - 11:15">11:00 - 11:15</option><option value="11:15 - 11:30">11:15 - 11:30</option><option value="11:30 - 11:45">11:30 - 11:45</option><option value="11:45 - 12:00">11:45 - 12:00</option><option value="12:00 - 12:15">12:00 - 12:15</option><option value="12:15 - 12:30">12:15 - 12:30</option><option value="12:30 - 12:45">12:30 - 12:45</option><option value="12:45 - 13:00">12:45 - 13:00</option><option value="13:00 - 13:15">13:00 - 13:15</option><option value="13:15 - 13:30">13:15 - 13:30</option><option value="13:30 - 13:45">13:30 - 13:45</option><option value="13:45 - 14:00">13:45 - 14:00</option><option value="14:00 - 14:15">14:00 - 14:15</option><option value="14:15 - 14:30">14:15 - 14:30</option><option value="14:30 - 14:45">14:30 - 14:45</option><option value="14:45 - 15:00">14:45 - 15:00</option><option value="15:00 - 15:15">15:00 - 15:15</option><option value="15:15 - 15:30">15:15 - 15:30</option><option value="15:30 - 15:45">15:30 - 15:45</option><option value="15:45 - 16:00">15:45 - 16:00</option>                        </select>
+                        <div class="caption">Время посещения</div>
+                        </td>
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <select name="VisaTypeId[]" id="VisaTypeId-1" onchange="removeError(this.id);" style="width:" '="" class="form-control-input validate vtype">						
+                        <option value="" selected="selected">Тип визы</option>
+                        <option value="12">Бизнес</option><option value="13">Водители </option><option value="14">Учёба сроком менее 90 дней</option><option value="15">Культурные мероприятия</option><option value="17">Владельцы недвижимости</option><option value="18">Моряки</option><option value="24">5 лет - Шенгенская виза С</option><option value="25">3 года - Шенгенская виза С</option><option value="26">2 года - Шенгенская виза С</option><option value="27">Родственники граждан Испании или ЕС</option><option value="31">1 года - Шенгенская виза С</option>                        </select>
+                        <div class="caption">Тип визы</div>
+                        </td>  
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <input type="text" name="first_name[]" id="first_name-1" onfocus="removeError(this.id);" placeholder="First Name" class="form-control-input validate" value="">
+                        <div class="caption">Имя</div>
+                        </td>
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <input type="text" placeholder="Last Name" name="last_name[]" id="last_name-1" onfocus="removeError(this.id);" class="form-control-input validate" value="">
+                        <div class="caption">Фамилия</div>
+                        </td>
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <input type="text" placeholder="Date of Birth" name="date_of_birth[]" id="date_of_birth-1" onfocus="removeError(this.id);" class="form-control-input date_of_birth validate" value="" readonly="">
+                        <div class="caption">Дата рождения</div>
+                        </td>                      
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <select name="nationality[]" id="nationality-1" onchange="removeError(this.id);" class="form-control-input validate">
+                        <option value="" selected="selected">Выберите Национальность</option>
+                        <option value="16">Австралия</option><option value="17">Австрия</option><option value="18">Азербайджан</option><option value="6">Албания</option><option value="62">Алжир</option><option value="12">Американское Самоа</option><option value="4">Ангилья</option><option value="3">Ангола</option><option value="7">Андорра</option><option value="13">Антарктида</option><option value="15">Антигуа и Барбуда</option><option value="10">Аргентина</option><option value="11">Армения</option><option value="1">Аруба</option><option value="2">Афганистан</option><option value="26">Багамские острова</option><option value="23">Бангладеш</option><option value="33">Барбадос</option><option value="25">Бахрейн</option><option value="28">Беларусь</option><option value="29">Белиз</option><option value="20">Бельгия</option><option value="21">Бенин</option><option value="30">Бермудские Острова</option><option value="24">Болгария</option><option value="31">Боливия</option><option value="27">Босния</option><option value="37">Ботсвана</option><option value="32">Бразилия</option><option value="34">Бруней</option><option value="22">Буркина – Фасо</option><option value="19">Бурунди</option><option value="35">Бутан</option><option value="239">Вануату</option><option value="233">Ватикан</option><option value="78">Великобриитания</option><option value="99">Венгрия</option><option value="235">Венесуэла</option><option value="251">Виргинские Острова</option><option value="218">Восточный Тимор</option><option value="238">Вьетнам </option><option value="77">Габон</option><option value="98">Гаити</option><option value="93">Гайана</option><option value="84">Гамбия</option><option value="80">Гана</option><option value="83">Гваделупе</option><option value="90">Гватемала</option><option value="82">Гвинея</option><option value="85">Гвинея-Бисау</option><option value="57">Германия</option><option value="81">Гибралтар</option><option value="96">Гондурас</option><option value="249">Гонконг</option><option value="88">Гренада</option><option value="89">Гренландия</option><option value="87">Греция</option><option value="79">Грузия</option><option value="60">Дания</option><option value="248">Демократическая Республика Конго</option><option value="58">Джибути</option><option value="59">Доминика</option><option value="61">Доминиканская Республика</option><option value="64">Египет</option><option value="246">Замбия</option><option value="66">Западная Сахара</option><option value="247">Зимбабве</option><option value="107">Израиль</option><option value="101">Индия</option><option value="100">Индонезия</option><option value="110">Иордания</option><option value="105">Ирак</option><option value="104">Иран</option><option value="103">Ирландия</option><option value="106">Исландия</option><option value="67">испания</option><option value="108">Италия</option><option value="243">Йемен </option><option value="50">Кабо-Верде</option><option value="112">Казахстан</option><option value="115">Камбоджа</option><option value="45">Камерун</option><option value="39">Канада</option><option value="182">Катар</option><option value="113">Кения</option><option value="55">Кипр</option><option value="116">Кирибати</option><option value="43">Китай</option><option value="48">Колумбия</option><option value="49">Коморы</option><option value="51">Коста-Рика</option><option value="44">Кот-д´Ивуар</option><option value="52">Куба</option><option value="119">Кувейт</option><option value="114">Кыргызстан</option><option value="120">Лаос</option><option value="130">Латвия</option><option value="127">Лесото</option><option value="122">Либерия</option><option value="121">Ливан</option><option value="123">Ливия</option><option value="128">Литва</option><option value="125">Лихтенштейн</option><option value="129">Люксембург</option><option value="150">Маврикий</option><option value="147">Мавритания</option><option value="135">Мадагаскар</option><option value="153">Майотта</option><option value="250">Макао</option><option value="139">Македония</option><option value="151">Малави</option><option value="152">Малайзия</option><option value="140">Мали</option><option value="136">Мальдивы</option><option value="141">Мальта</option><option value="149">Мартиника</option><option value="138">Маршалловы Острова</option><option value="137">Мексика</option><option value="146">Мозамбик</option><option value="134">Молдова</option><option value="133">Монако</option><option value="144">Монголия</option><option value="148">Монтсеррат</option><option value="132">Морокко</option><option value="142">Мьянмар</option><option value="154">Намибия</option><option value="164">Науру</option><option value="8">Недерландские Антильские Острова</option><option value="161">Недерланды</option><option value="163">Непал</option><option value="156">Нигер</option><option value="158">Нигерия</option><option value="159">Никарагуа</option><option value="166">Новая Зеландия</option><option value="162">Норвегия</option><option value="167">Оман</option><option value="192">Остров Святой Елены</option><option value="54">Острова Кайман</option><option value="47">Острова Кука</option><option value="168">Пакистан</option><option value="173">Палау</option><option value="180">Палестина</option><option value="169">Панама</option><option value="174">Папуа Новая Гвинея</option><option value="179">Парагвай</option><option value="171">Перу</option><option value="175">Польша</option><option value="178">Португалия</option><option value="176">Пуэрто-Рико</option><option value="46">Республика Конго</option><option value="183">Реюньон</option><option value="185" selected="">Российская Федерация</option><option value="186">Руанда</option><option value="184">Румыния</option><option value="196">Сальвадор</option><option value="241">Самоа</option><option value="197">Сан-Марино</option><option value="202">Сан-Томе и Принсипи</option><option value="187">Саудовска Арабия</option><option value="118">Северная Корея</option><option value="177">Северная Корея</option><option value="208">Сейшельские острова</option><option value="189">Сенегал</option><option value="234">Сент-Винсент и Гренадины </option><option value="117">Сент-Китс и Невис</option><option value="124">Сент-Люсия</option><option value="200">Сербия</option><option value="190">Сингапур</option><option value="209">Сирия</option><option value="204">Словакия</option><option value="205">Словения</option><option value="9">Соединенные Арабские Эмираты</option><option value="231">Соединенные Штаты Америки</option><option value="194">Соломоновы острова</option><option value="198">Сомали</option><option value="188">Судан</option><option value="203">Суринам</option><option value="195">Сьерра-Леоне</option><option value="215">Таджикистан</option><option value="214">Таиланд</option><option value="224">Тайвань</option><option value="225">Танзания</option><option value="211">Теркс и Кайкос</option><option value="213">Того</option><option value="219">Тонга</option><option value="220">Тринидад и Тобаго</option><option value="223">Тувалу</option><option value="221">Тунис</option><option value="217">Туркменистан</option><option value="222">Турция</option><option value="226">Уганда</option><option value="232">Узбекистан</option><option value="227">Украина</option><option value="230">Уругвай</option><option value="75">Федеративные штаты микронезии</option><option value="71">Фиджи</option><option value="172">Филиппны</option><option value="70">Финляндия</option><option value="73">Франция</option><option value="91">Французская Гвиана</option><option value="181">Французская Полинезия</option><option value="14">Французскиие Южные и Антарктические Территории</option><option value="97">Хорватия</option><option value="38">Центральноафриканская республика</option><option value="212">Чад</option><option value="143">Черногория</option><option value="56">Чешская Республика</option><option value="42">Чили</option><option value="41">Швейцария</option><option value="207">Швейцария</option><option value="206">Швеция</option><option value="252">Шотландия</option><option value="193">Шпицберген и Ян-Майен</option><option value="126">Шри-Ланка</option><option value="63">Эквадор</option><option value="86">Экваториальная Гвинея</option><option value="65">Эритрея</option><option value="68">Эстония</option><option value="69">Эфиопия</option><option value="191">Южная Георгия и Южные Сандвичевы Острова </option><option value="245">Южно-Африканская Республика</option><option value="201">Южный Судан</option><option value="109">Ямайка</option><option value="111">Япония</option>                        </select>
+                        <div class="caption">Гражданство</div>
+                        </td>
+                        </tr> 
+                        <tr>
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <select name="passportType[]" id="passportType-1" onfocus="removeError(this.id);" class="form-control-input validate">
+                        <option value="" selected="selected">Тип паспорта </option>
+                        <option value="01" selected="">Заграничный паспорт </option><option value="08">Паспорт иностранного гражданина</option><option value="11">Паспорт ООН</option><option value="05">Служебный паспорт</option>                        </select>
+                        <div class="caption">Тип паспорта</div>
+                        </td>
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <input type="text" placeholder="Passport No" name="passport_number[]" id="passport_number-1" onfocus="removeError(this.id);" class="form-control-input validate" value="">
+                        <div class="caption">Номер паспорта</div>
+                        </td>
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <input type="text" placeholder="Issue Date" name="pptIssueDate[]" class="form-control-input pptIssueDate validate" id="pptIssueDate-1" onfocus="removeError(this.id);" value="" readonly="">
+                        <div class="caption">Дата выдачи паспорта</div>
+                        </td>
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <input type="text" placeholder="Expiry Date" name="pptExpiryDate[]" class="form-control-input passport_validate_till validate" id="pptExpiryDate-1" onfocus="removeError(this.id);" value="" readonly="">
+                        <div class="caption">Паспорт действителен до</div>
+                        
+                        </td> 
+                        <td width="16%" align="left" valign="middle" class="captionpnl">
+                        <input type="text" placeholder="Issue Place" name="pptIssuePalace[]" class="form-control-input validate" id="pptIssuePalace-1" onfocus="removeError(this.id);" value="">
+                        <div class="caption">Место выдачи паспорта</div>
+                        </td>
+                        </tr>  
+                        </tbody></table>    
+                    </div>
+                  <div class="row marginBottom childDiv" id="mainDiv-2"><div class="row marginBottom"><div class="lineheightExtra">Applicant 2</div></div><table><tbody><tr><td width="16%" align="left" valign="middle" class="captionpnl"><select name="app_time[]" id="app_time-2" onchange="removeError(this.id);" style="width:" '="" class="form-control-input validate"><option value="" selected="selected">Время посещения</option><option value="09:45 - 10:00">09:45 - 10:00</option><option value="10:15 - 10:30">10:15 - 10:30</option><option value="10:30 - 10:45">10:30 - 10:45</option><option value="10:45 - 11:00">10:45 - 11:00</option><option value="11:00 - 11:15">11:00 - 11:15</option><option value="11:15 - 11:30">11:15 - 11:30</option><option value="11:30 - 11:45">11:30 - 11:45</option><option value="11:45 - 12:00">11:45 - 12:00</option><option value="12:00 - 12:15">12:00 - 12:15</option><option value="12:15 - 12:30">12:15 - 12:30</option><option value="12:30 - 12:45">12:30 - 12:45</option><option value="12:45 - 13:00">12:45 - 13:00</option><option value="13:00 - 13:15">13:00 - 13:15</option><option value="13:15 - 13:30">13:15 - 13:30</option><option value="13:30 - 13:45">13:30 - 13:45</option><option value="13:45 - 14:00">13:45 - 14:00</option><option value="14:00 - 14:15">14:00 - 14:15</option><option value="14:15 - 14:30">14:15 - 14:30</option><option value="14:30 - 14:45">14:30 - 14:45</option><option value="14:45 - 15:00">14:45 - 15:00</option><option value="15:00 - 15:15">15:00 - 15:15</option><option value="15:15 - 15:30">15:15 - 15:30</option><option value="15:30 - 15:45">15:30 - 15:45</option><option value="15:45 - 16:00">15:45 - 16:00</option></select><div class="caption">Время посещения</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><select name="VisaTypeId[]" id="VisaTypeId-2" onchange="removeError(this.id);" style="width:" '="" class="form-control-input validate vtype"><option value="" selected="selected">Тип визы</option><option value="12">Бизнес</option><option value="13">Водители </option><option value="14">Учёба сроком менее 90 дней</option><option value="15">Культурные мероприятия</option><option value="17">Владельцы недвижимости</option><option value="18">Моряки</option><option value="24">5 лет - Шенгенская виза С</option><option value="25">3 года - Шенгенская виза С</option><option value="26">2 года - Шенгенская виза С</option><option value="27">Родственники граждан Испании или ЕС</option><option value="31">1 года - Шенгенская виза С</option></select><div class="caption">Тип визы</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><input type="text" name="first_name[]" id="first_name-2" onfocus="removeError(this.id);" placeholder="First Name" class="form-control-input validate" value=""><div class="caption">Имя</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><input type="text" placeholder="Last Name" name="last_name[]" id="last_name-2" onfocus="removeError(this.id);" class="form-control-input validate" value=""><div class="caption">Фамилия</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><input type="text" placeholder="Date of Birth" name="date_of_birth[]" id="date_of_birth-2" onfocus="removeError(this.id);" class="form-control-input date_of_birth validate" readonly="" value=""><div class="caption">Дата рождения</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><select name="nationality[]" id="nationality-2" onchange="removeError(this.id);" class="form-control-input validate"><option value="" selected="selected">Гражданство</option><option value="16">Австралия</option><option value="17">Австрия</option><option value="18">Азербайджан</option><option value="6">Албания</option><option value="62">Алжир</option><option value="12">Американское Самоа</option><option value="4">Ангилья</option><option value="3">Ангола</option><option value="7">Андорра</option><option value="13">Антарктида</option><option value="15">Антигуа и Барбуда</option><option value="10">Аргентина</option><option value="11">Армения</option><option value="1">Аруба</option><option value="2">Афганистан</option><option value="26">Багамские острова</option><option value="23">Бангладеш</option><option value="33">Барбадос</option><option value="25">Бахрейн</option><option value="28">Беларусь</option><option value="29">Белиз</option><option value="20">Бельгия</option><option value="21">Бенин</option><option value="30">Бермудские Острова</option><option value="24">Болгария</option><option value="31">Боливия</option><option value="27">Босния</option><option value="37">Ботсвана</option><option value="32">Бразилия</option><option value="34">Бруней</option><option value="22">Буркина – Фасо</option><option value="19">Бурунди</option><option value="35">Бутан</option><option value="239">Вануату</option><option value="233">Ватикан</option><option value="78">Великобриитания</option><option value="99">Венгрия</option><option value="235">Венесуэла</option><option value="251">Виргинские Острова</option><option value="218">Восточный Тимор</option><option value="238">Вьетнам </option><option value="77">Габон</option><option value="98">Гаити</option><option value="93">Гайана</option><option value="84">Гамбия</option><option value="80">Гана</option><option value="83">Гваделупе</option><option value="90">Гватемала</option><option value="82">Гвинея</option><option value="85">Гвинея-Бисау</option><option value="57">Германия</option><option value="81">Гибралтар</option><option value="96">Гондурас</option><option value="249">Гонконг</option><option value="88">Гренада</option><option value="89">Гренландия</option><option value="87">Греция</option><option value="79">Грузия</option><option value="60">Дания</option><option value="248">Демократическая Республика Конго</option><option value="58">Джибути</option><option value="59">Доминика</option><option value="61">Доминиканская Республика</option><option value="64">Египет</option><option value="246">Замбия</option><option value="66">Западная Сахара</option><option value="247">Зимбабве</option><option value="107">Израиль</option><option value="101">Индия</option><option value="100">Индонезия</option><option value="110">Иордания</option><option value="105">Ирак</option><option value="104">Иран</option><option value="103">Ирландия</option><option value="106">Исландия</option><option value="67">испания</option><option value="108">Италия</option><option value="243">Йемен </option><option value="50">Кабо-Верде</option><option value="112">Казахстан</option><option value="115">Камбоджа</option><option value="45">Камерун</option><option value="39">Канада</option><option value="182">Катар</option><option value="113">Кения</option><option value="55">Кипр</option><option value="116">Кирибати</option><option value="43">Китай</option><option value="48">Колумбия</option><option value="49">Коморы</option><option value="51">Коста-Рика</option><option value="44">Кот-д´Ивуар</option><option value="52">Куба</option><option value="119">Кувейт</option><option value="114">Кыргызстан</option><option value="120">Лаос</option><option value="130">Латвия</option><option value="127">Лесото</option><option value="122">Либерия</option><option value="121">Ливан</option><option value="123">Ливия</option><option value="128">Литва</option><option value="125">Лихтенштейн</option><option value="129">Люксембург</option><option value="150">Маврикий</option><option value="147">Мавритания</option><option value="135">Мадагаскар</option><option value="153">Майотта</option><option value="250">Макао</option><option value="139">Македония</option><option value="151">Малави</option><option value="152">Малайзия</option><option value="140">Мали</option><option value="136">Мальдивы</option><option value="141">Мальта</option><option value="149">Мартиника</option><option value="138">Маршалловы Острова</option><option value="137">Мексика</option><option value="146">Мозамбик</option><option value="134">Молдова</option><option value="133">Монако</option><option value="144">Монголия</option><option value="148">Монтсеррат</option><option value="132">Морокко</option><option value="142">Мьянмар</option><option value="154">Намибия</option><option value="164">Науру</option><option value="8">Недерландские Антильские Острова</option><option value="161">Недерланды</option><option value="163">Непал</option><option value="156">Нигер</option><option value="158">Нигерия</option><option value="159">Никарагуа</option><option value="166">Новая Зеландия</option><option value="162">Норвегия</option><option value="167">Оман</option><option value="192">Остров Святой Елены</option><option value="54">Острова Кайман</option><option value="47">Острова Кука</option><option value="168">Пакистан</option><option value="173">Палау</option><option value="180">Палестина</option><option value="169">Панама</option><option value="174">Папуа Новая Гвинея</option><option value="179">Парагвай</option><option value="171">Перу</option><option value="175">Польша</option><option value="178">Португалия</option><option value="176">Пуэрто-Рико</option><option value="46">Республика Конго</option><option value="183">Реюньон</option><option value="185" selected="">Российская Федерация</option><option value="186">Руанда</option><option value="184">Румыния</option><option value="196">Сальвадор</option><option value="241">Самоа</option><option value="197">Сан-Марино</option><option value="202">Сан-Томе и Принсипи</option><option value="187">Саудовска Арабия</option><option value="118">Северная Корея</option><option value="177">Северная Корея</option><option value="208">Сейшельские острова</option><option value="189">Сенегал</option><option value="234">Сент-Винсент и Гренадины </option><option value="117">Сент-Китс и Невис</option><option value="124">Сент-Люсия</option><option value="200">Сербия</option><option value="190">Сингапур</option><option value="209">Сирия</option><option value="204">Словакия</option><option value="205">Словения</option><option value="9">Соединенные Арабские Эмираты</option><option value="231">Соединенные Штаты Америки</option><option value="194">Соломоновы острова</option><option value="198">Сомали</option><option value="188">Судан</option><option value="203">Суринам</option><option value="195">Сьерра-Леоне</option><option value="215">Таджикистан</option><option value="214">Таиланд</option><option value="224">Тайвань</option><option value="225">Танзания</option><option value="211">Теркс и Кайкос</option><option value="213">Того</option><option value="219">Тонга</option><option value="220">Тринидад и Тобаго</option><option value="223">Тувалу</option><option value="221">Тунис</option><option value="217">Туркменистан</option><option value="222">Турция</option><option value="226">Уганда</option><option value="232">Узбекистан</option><option value="227">Украина</option><option value="230">Уругвай</option><option value="75">Федеративные штаты микронезии</option><option value="71">Фиджи</option><option value="172">Филиппны</option><option value="70">Финляндия</option><option value="73">Франция</option><option value="91">Французская Гвиана</option><option value="181">Французская Полинезия</option><option value="14">Французскиие Южные и Антарктические Территории</option><option value="97">Хорватия</option><option value="38">Центральноафриканская республика</option><option value="212">Чад</option><option value="143">Черногория</option><option value="56">Чешская Республика</option><option value="42">Чили</option><option value="41">Швейцария</option><option value="207">Швейцария</option><option value="206">Швеция</option><option value="252">Шотландия</option><option value="193">Шпицберген и Ян-Майен</option><option value="126">Шри-Ланка</option><option value="63">Эквадор</option><option value="86">Экваториальная Гвинея</option><option value="65">Эритрея</option><option value="68">Эстония</option><option value="69">Эфиопия</option><option value="191">Южная Георгия и Южные Сандвичевы Острова </option><option value="245">Южно-Африканская Республика</option><option value="201">Южный Судан</option><option value="109">Ямайка</option><option value="111">Япония</option></select><div class="caption">Гражданство</div></td></tr><tr><td width="16%" align="left" valign="middle" class="captionpnl"><select name="passportType[]" id="passportType-2" onfocus="removeError(this.id);" class="form-control-input validate"><option value="" selected="selected">Тип паспорта </option><option value="01" selected="">Заграничный паспорт </option><option value="08">Паспорт иностранного гражданина</option><option value="11">Паспорт ООН</option><option value="05">Служебный паспорт</option></select><div class="caption">Тип паспорта</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><input type="text" placeholder="Passport No" name="passport_number[]" id="passport_number-2" onfocus="removeError(this.id);" class="form-control-input validate" value=""><div class="caption">Номер паспорта</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><input type="text" placeholder="Issue Date" name="pptIssueDate[]" class="form-control-input pptIssueDate validate" id="pptIssueDate-2" onfocus="removeError(this.id);" readonly="" value=""><div class="caption">Дата выдачи паспорта</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><input type="text" placeholder="Expiry Date" name="pptExpiryDate[]" class="form-control-input passport_validate_till validate" id="pptExpiryDate-2" onfocus="removeError(this.id);" readonly="" value=""><div class="caption">Паспорт действителен до</div></td><td width="16%" align="left" valign="middle" class="captionpnl"><input type="text" placeholder="Issue Place" name="pptIssuePalace[]" class="form-control-input validate" id="pptIssuePalace-2" onfocus="removeError(this.id);" value=""><div class="caption">Место выдачи паспорта</div></td></tr></tbody></table></div></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3" height="5"></td>
+                </tr>
+                <!--<tr id="pn_tr" height="30">
+                    <td valign="middle" class="styleBlack" width="20%" style="padding-left:10px;">&nbsp;</td>
+                    <td width="21%" align="left" valign="middle" id="termsborder">
+                       <input type="checkbox" name="terms" id="terms" value="1" style="margin-top:3px;" >&nbsp;I agree to the <a href="terms-and-condition.php" target="_blank" style="text-decoration:underline; float: none; color:#FFF" id="aterms">Terms and Conditions</a>
+                    </td>
+                    <td valign="middle" class="styleBlack" width="59%" style="padding-left:10px;">&nbsp;</td>
+                </tr>-->
+                <!--<tr id="pn_tr" height="30">
+                    <td valign="middle" class="styleBlack" width="34%" style="padding-left:10px;">&nbsp;</td>
+                    <td width="66%" align="left" valign="middle" id="termsborder">
+                    <a href="https://www.rgs.ru/products/private_person/tour/strahovanie_turistov/calc/partner.wbp?c=7710953642" target="_blank" style=" float:none;color:#31708f;font-size:11px;background:#d9edf7;padding:5px;border-radius: 4px;">Don't have travel policy please purchase from here</a>
+                    </td>
+                </tr>-->
+                <tr height="85">
+                    <td width="20%" valign="middle" class="styleBlack" style="padding-left:10px;">&nbsp;</td>
+                    <td width="21%" align="left" valign="middle">
+                    <div>
+                    <div style="float:left">
+                    <img src="./blsspain-russia.com_files/captcha.php" id="captcha-img" style="margin:0; padding:0">
+                    </div>
+                    <div style="float:left; margin-top:20px; margin-left:10px;">
+                    <a href="javascript:void(0)" onclick="document.getElementById(&#39;captcha-img&#39;).src=&#39;captcha/captcha.php?&#39;+Math.random();" id="change-image" style="float:left">
+                        	<img border="0" src="./blsspain-russia.com_files/refresh.png" alt="Not readable? Change text." title="Not readable? Change text.">
+                    </a>
+                    </div>
+                    <div style="clear:both"></div>
+                    </div>
+                    </td>
+                    <td width="59%" align="left" valign="middle">&nbsp;</td>
+                </tr>
+                <tr height="30">
+                	<td valign="middle" class="styleBlack" width="20%" style="padding-left:10px;">
+                    	Введите символы с картинки: <span style="color:#F00">*</span>
+                    </td>
+                    <td colspan="2" align="left" valign="middle">
+                    <input type="text" name="captcha" id="captcha" style="width: 260px;" class="form-control-input validate"></td>
+                </tr>
+                <tr id="submit_tr">
+                    <td>&nbsp;</td>
+                    <td colspan="2" id="new">	
+                        <input type="submit" name="save" value="Submit" class="btn primary-btn">
+                        <input type="hidden" name="app_date_hidden" id="app_date_hidden" value="2022-07-07">
+                        <input type="hidden" name="loc_final" id="loc_final" value="1">
+                        <input type="hidden" name="countryID" id="countryID" value="185">
+                        <input type="hidden" name="missionId" id="missionId" value="6">
+                        <input type="hidden" name="agentId" id="agentId" value="">
+                    </td>	
+                </tr>
+            </tbody></table>
+          </td>
+      </tr>
+</tbody></table>
+</form>
+</div>
+<script type="text/javascript">
+	var today = new Date();
+	var dd = today.getDate()+1;
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	if(dd<10){
+		dd='0'+dd
+	} 
+	if(mm<10){
+		mm='0'+mm
+	} 
+	var today = yyyy+'-'+mm+'-'+dd;
+	function formatDate(rawDate) {
+	  var day = ("0" + rawDate.getDate()).slice(-2);
+	  var month = ("0" + (rawDate.getMonth() + 1)).slice(-2);
+	  return (day)+ "-" + (month)+ "-" +rawDate.getFullYear() ;
+	}		
+	$(document).ready(function() {
+		var dt1  = '2022-07-06';
+		var checkService  = 'Normal';
+			 $('.date_of_birth').datepicker({
+					format: "yyyy-mm-dd",
+					endDate: new Date(dt1),
+					startDate: '-100y',
+					autoclose: true,
+					startView: 2
+			  });
+			  $('.pptIssueDate').datepicker({
+					format: "yyyy-mm-dd",
+					endDate: new Date(dt1),
+					startDate: '-100y',
+					autoclose: true,
+					startView: 2
+				});
+			  $('.passport_validate_till').datepicker({
+					format: "yyyy-mm-dd",
+					startDate: new Date(dt1),
+					autoclose: true,
+					startView: 2
+			  });
+			  $('#travelDate').datepicker({
+					format: "yyyy-mm-dd",
+					startDate: '2022-07-07',
+					autoclose: true,
+					startView: 0
+			  });
+		var dt4  = '2022-07-07';
+		var blocked_dates = ["01-01-2020","06-01-2020","07-01-2020","09-03-2020","12-10-2020","02-11-2020","04-11-2020","07-12-2020","25-12-2020","30-12-2020","31-12-2020","30-12-2020","08-12-2020","09-12-2020","10-12-2020","11-12-2020","12-12-2020","13-12-2020","14-12-2020","31-12-2020","01-01-2021","05-01-2021","06-01-2021","07-01-2021","04-01-2021","23-02-2021","08-03-2021","01-04-2021","02-04-2021","01-05-2021","10-05-2021","03-05-2021","05-05-2021","07-05-2021","01-06-2021","12-10-2021","01-11-2021","02-11-2021","03-11-2021","04-11-2021","05-11-2021","06-11-2021","06-12-2021","24-12-2021","25-12-2021","31-12-2021","06-01-2022","07-01-2022","23-02-2022","08-03-2022","15-04-2022","02-05-2022","09-05-2022","01-01-2020","06-01-2020","07-01-2020","09-03-2020","12-10-2020","02-11-2020","04-11-2020","07-12-2020","25-12-2020","30-12-2020","31-12-2020","30-12-2020","08-12-2020","09-12-2020","10-12-2020","11-12-2020","12-12-2020","13-12-2020","14-12-2020","31-12-2020","01-01-2021","05-01-2021","06-01-2021","07-01-2021","04-01-2021","23-02-2021","08-03-2021","01-04-2021","02-04-2021","01-05-2021","10-05-2021","03-05-2021","05-05-2021","07-05-2021","01-06-2021","12-10-2021","01-11-2021","02-11-2021","03-11-2021","04-11-2021","05-11-2021","06-11-2021","06-12-2021","24-12-2021","25-12-2021","31-12-2021","06-01-2022","07-01-2022","23-02-2022","08-03-2022","15-04-2022","02-05-2022","09-05-2022"];
+		var available_dates = ["07-07-2022","08-07-2022","11-07-2022"];
+		var fullCapicity_dates = ["12-07-2022","13-07-2022","14-07-2022","15-07-2022"];
+		var offDates_dates = ["09-07-2022","10-07-2022"];
+		var allowArray = [1];
+		/*if(checkService == 'Normal' || checkService == 'Personal-Assistance')
+		{
+			if((jQuery.inArray(2, allowArray)!='-1') || (jQuery.inArray(3, allowArray)!='-1')) 
+			{
+				var classFull = 'fullcapspecial';
+				var tooltipTitle = '&nbsp;';
+				var backDatetitle = 'Not Allowed';
+			}else{
+				var classFull = 'fullcap';
+				var tooltipTitle = 'Slots Full';
+				var backDatetitle = 'Not Allowed';
+			}
+		}else{
+			var classFull = 'fullcap';
+			var tooltipTitle = 'Slots Full';
+			var backDatetitle = 'Not Allowed';
+		}*/
+		var classFull = 'fullcap';
+		var tooltipTitle = 'Slots Full';
+		var backDatetitle = 'Not Allowed';
+		$('.app_date').datepicker({
+			language: "en",
+			Default: true,
+			format: "yyyy-mm-dd",
+			startDate: new Date(dt4),
+			endDate: '2022-07-15', 
+			autoclose: true,
+			forceParse:true,
+			startView: 0,
+			beforeShowDay: function(date){
+				   var formattedDate = formatDate(date);
+				   if ($.inArray(formattedDate.toString(), blocked_dates) != -1){
+					   return {
+						  enabled : false,
+						  classes: 'inactiveClass',
+						  tooltip: 'Holiday'
+					   };
+				   }
+				   if ($.inArray(formattedDate.toString(), available_dates) != -1){
+					   return {
+						  enabled : true,
+						  classes: 'activeClass',
+						  tooltip: 'Book'
+					   };
+				   }
+				   if ($.inArray(formattedDate.toString(), fullCapicity_dates) != -1){
+					   return {
+						  enabled : false,
+						  classes: classFull,
+						  tooltip: tooltipTitle
+					   };
+				   }
+				   if ($.inArray(formattedDate.toString(), offDates_dates) != -1){
+					   return {
+						  enabled : false,
+						  classes: 'offday',
+						  tooltip: 'Off Day'
+					   };
+				   }
+				   
+					return {
+					  enabled : false,
+					  tooltip: backDatetitle
+				   };
+				  return;
+			  }
+	    });
+		/*====== CALL POP FOR PL/PT IN NORMAL CASE=======*/
+		if(checkService == 'Normal' || checkService == 'Personal-Assistance')
+		{
+			if((jQuery.inArray(2, allowArray)!='-1') || (jQuery.inArray(3, allowArray)!='-1')) 
+		    {
+				/*$(document).on('click', '.fullcap,.fullcapspecial', function () {
+				$(".datepicker").hide();
+				$('.popupBG').show();
+				$('#IDBodyPanel').show();
+				});
+				$(".popupCloseIcon").click(function() {
+				$(".popupBG").hide();
+				$("#IDBodyPanel").hide(); 
+				});*/
+			
+				$('input[type=radio][name=serviceChange]').change(function() {
+				if (this.value == 'Premium') {
+					$("#premiumService").prop('value', 'GO FOR PREMIUM');
+				}
+				else if (this.value == 'Prime') {
+					$("#premiumService").prop('value', 'GO FOR PRIME TIME');
+				}
+				
+				});
+			}
+		}
+		
+	});
+</script>
+</div>
+</div>
+</section>
+
+<section class="row aboutBG">
+<div class="wrap">
+<div class="row marginBottom marginTop paddingBottom paddingTop">
+
+<div class="col-sm-8 container">
+
+<h3 class="row fontweightNone marginBottom">Куда Вам нужно обратиться за визой</h3>
+
+
+
+<div class="row borderAll boxsizing borderBottomNone">
+
+<h4 class="col-sm-7 paddingInBoxExtra greyBG borderRight fontweightNone">Если вы проживаете в</h4>
+
+<h4 class="col-sm-3 paddingInBoxExtra greyBG fontweightNone">
+Вам нужно посетить</h4>
+
+</div>
+
+
+
+<div class="row borderAll boxsizing borderBottomNone">
+
+<div class="col-sm-7 paddingInBox borderRight">Центральном, Южном, Дальневосточном, Сибирском, Уральском, Приволжском и Северо-Кавказском федеральном округе</div>
+
+<div class="col-sm-3 paddingInBox">Генеральное Консульство Испании в Москве</div>
+
+</div>
+
+
+
+<!--<div class="row borderAll boxsizing">
+
+<div class="col-sm-7 paddingInBox borderRight">&nbsp;</div>
+
+<div class="col-sm-3 paddingInBox">Испанский визовый центр БЛС в Санкт - Петербурге</div>
+
+</div>-->
+
+
+
+<!--<div class="row borderAll boxsizing borderBottomNone">
+
+<div class="col-sm-7 paddingInBox borderRight">&nbsp;</div>
+
+<div class="col-sm-3 paddingInBox">BLS Spain VAC Rabat </div>
+
+</div>
+
+
+
+<div class="row borderAll boxsizing borderBottomNone">
+
+<div class="col-sm-7 paddingInBox borderRight">&nbsp;</div>
+
+<div class="col-sm-3 paddingInBox">BLS Spain VAC Nadar </div>
+
+</div>
+
+
+
+<div class="row borderAll boxsizing borderBottomNone">
+
+<div class="col-sm-7 paddingInBox borderRight">&nbsp;</div>
+
+<div class="col-sm-3 paddingInBox">BLS Spain VAC Tetuan  </div>
+
+</div>
+
+
+
+<div class="row borderAll boxsizing">
+
+<div class="col-sm-7 paddingInBox borderRight">&nbsp;</div>
+
+<div class="col-sm-3 paddingInBox">BLS Spain VAC Agadir  </div>
+
+</div>-->
+
+
+
+<!--<div class="row borderAll boxsizing">
+
+<div class="col-sm-7 paddingInBox borderRight">&nbsp;</div>
+
+<div class="col-sm-3 paddingInBox">BLS Spain VAC Canton</div>
+
+</div>-->
+
+
+
+</div>
+
+</div></div>
+</section>
+
+<section class="row aboutBG">
+<div class="wrap">
+
+
+</div>
+</section>
+
+
+</div>
+<!-- /body Panel -->
+
+
+<!-- footer Panel -->
+<style>
+#mySidenav a {
+    position:fixed;
+    right: -260px;
+    transition: 0.3s;
+    padding: 15px;
+    width: 335px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px 0 0 5px;
+	margin-top: 110px;
+}
+
+#mySidenav a:hover {
+    right: 0;
+}
+
+#request {
+    top: 20px;
+    background-color: #bf8f2c;
+}
+#attestation {
+    top: 95px;
+    background-color: #bf8f2c;
+	position:fixed;
+    right: -185px;
+	padding: 10px;
+    width: 260px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px 0 0 5px;
+	margin-top: 110px;
+}
+</style>
+
+<div id="mySidenav" class="sidenav">
+<a href="https://blsspain-russia.com/moscow/mobile-biometric.php" id="request"><img src="./blsspain-russia.com_files/icon-app.png" style="float:left;"><span style="padding:8px 0 0 15px;">подать документы из дома</span></a>
+</div>
+<!--<a href="https://blsattestation.com/" target="_blank" id="attestation"><img src="images/attestationService.gif" style="float:left;"></a>-->
+
+
+
+<footer class="row footerSection pull_left">
+<div class="wrap paddingInBox boxing footerBG">
+
+<div class="row paddingBottom">
+<a href="https://blsspain-russia.com/moscow/about.php" class="link">О нас</a>
+<a href="https://blsspain-russia.com/moscow/customer_experience.php" class="link">Обратная связь с клиентом</a>
+<a href="https://blsspain-russia.com/moscow/faq.php" class="link">Часто задаваемые вопросы</a>
+<a href="https://blsspain-russia.com/moscow/security_rules.php" class="link">Правила безопасности</a>
+</div>
+
+<div class="row white">
+<div class="font11">© BLS International 2022. Все права защищены</div>
+<div class="pull_right">
+<a href="https://blsspain-russia.com/moscow/privacy-policy.php" class="white font11 floatNone">политика конфиденциальности</a> | 
+<a href="https://blsspain-russia.com/moscow/cookies.php" class="white font11 floatNone">Политика Cookies</a> | 
+<a href="https://blsspain-russia.com/moscow/disclaimer.php" class="white font11 floatNone">Отказ от ответственности</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- /footer Panel -->
+<!---------------------POP UP BOX FOR PL/PT------------------------------>
+<div class="popup notification" id="IDBodyPanel" style="height:227px; display:none; padding:29px; width:700px;">
+<div class="popupCloseIcon">X</div>
+<!--<h1 class="row paddingBottom fontweightNone borderBottom alignCenter">Normal Slot Full!!</h1>-->
+<div class="row paddingInBoxExtra fontweightNone alignCenter paddingTopNone marginTop">В связи с большим количеством оформленных предварительных записей в визовый центр, мы предлагаем оформить Вам предварительную запись в VIP-зал за дополнительную плату для экономии времени ожидания в визовом центре.</div>
+<div class="row paddingInBoxExtra fontweightNone alignCenter paddingTopNone">
+» Премиум-зал - назначение будет действовать с 9:00 до 20:00 (пн-пт).<br>
+» Прайм-тайм - назначение будет действовать с 16:00 до 20:00 (пн-пт).
+</div>
+<div class="container col-sm-6 ">
+<form name="applicantPremium" id="applicantPremium" action="https://blsspain-russia.com/moscow/appointment_family.php" method="post" autocomplete="off">
+</form>
+</div>
+</div>
+<div class="popupBG" style="display:none"></div>
+<!-------------------- POP UP BOX FOR PL/PT ----------------------------->
+
+<div class="popupPanel" id="overlay" style="display:none">
+<div class="imageDiv"><img src="./blsspain-russia.com_files/loader.gif"></div>
+</div>
+<script language="JavaScript">
+
+//////////F12 disable code////////////////////////
+    document.onkeypress = function (event) {
+        event = (event || window.event);
+        if (event.keyCode == 123) {
+           //alert('No F-12');
+            return false;
+        }
+    }
+    document.onmousedown = function (event) {
+        event = (event || window.event);
+        if (event.keyCode == 123) {
+            //alert('No F-keys');
+            return false;
+        }
+    }
+document.onkeydown = function (event) {
+        event = (event || window.event);
+        if (event.keyCode == 123) {
+            //alert('No F-keys');
+            return false;
+        }
+    }
+/////////////////////end///////////////////////
+
+
+//Disable right click script 
+var message="Sorry, right-click has been disabled"; 
+/////////////////////////////////// 
+function clickIE() {if (document.all) {(message);return false;}} 
+function clickNS(e) {if 
+(document.layers||(document.getElementById&&!document.all)) { 
+if (e.which==2||e.which==3) {(message);return false;}}} 
+if (document.layers) 
+{document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;} 
+else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;} 
+document.oncontextmenu=new Function("return false") 
+// 
+function disableCtrlKeyCombination(e)
+{
+//list all CTRL + key combinations you want to disable
+var forbiddenKeys = new Array('a', 'n', 'j' , 'w','u');
+var key;
+var isCtrl;
+if(window.event)
+{
+key = window.event.keyCode;     //IE
+if(window.event.ctrlKey)
+isCtrl = true;
+else
+isCtrl = false;
+}
+else
+{
+key = e.which;     //firefox
+if(e.ctrlKey)
+isCtrl = true;
+else
+isCtrl = false;
+}
+//if ctrl is pressed check if other key is in forbidenKeys array
+if(isCtrl)
+{
+for(i=0; i<forbiddenKeys.length; i++)
+{
+//case-insensitive comparation
+if(forbiddenKeys[i].toLowerCase() == String.fromCharCode(key).toLowerCase())
+{
+alert('Key combination CTRL + '+String.fromCharCode(key) +' has been disabled.');
+return false;
+}
+}
+}
+return true;
+}
+</script>
+
+<div class="flexoverlay" style="display: none;"></div><ul id="flexmenu1" class="flexdropdownmenu jqflexmenu" style="z-index: 1000; display: none; visibility: visible;">
+<li><a href="https://blsspain-russia.com/moscow/short_term_visa.php">Краткосрочная виза (срок пребывания не более 90 дней)</a></li>
+</ul><ul id="flexmenu3" class="flexdropdownmenu jqflexmenu" style="z-index: 1000; display: none; visibility: visible;">
+<li style="z-index: 1000;"><a href="https://blsspain-russia.com/moscow/appointment_family.php#">BLS визовый центр<img src="./blsspain-russia.com_files/arrow.gif" class="rightarrowclass" style="border:0;"></a>
+<ul style="display: none; visibility: visible;">
+<li><a href="https://blsspain-russia.com/moscow/apply_for.php">Записаться на подачу документов</a></li>
+<li><a href="https://blsspain-russia.com/moscow/reprint_vac_appointment_letter.php">Распечатать письмо-подтверждение</a></li>
+<li><a href="https://blsspain-russia.com/moscow/cancel_vac_appointment.php">Отменить запись</a></li>
+</ul>
+</li>
+<!--<li><a href="#">В Генеральное Консульство</a>
+<ul>
+<!--<li><a href="embassy_appointment.php">Записаться на Шенгенскую визу</a></li>-->
+<!--<li><a href="embassy_appointment_long_stay.php">Записаться на национальную визу</a></li>-->
+<!--<li><a href="reprint_embassy_letter.php">Распечатать письмо-подтверждение</a></li>-->
+<!--</ul>
+</li>-->
+
+</ul><ul id="flexmenu2" class="flexdropdownmenu jqflexmenu" style="display: none; visibility: visible; z-index: 1004; left: 458.594px; top: 113px;">
+<li><a href="https://blsspain-russia.com/moscow/customer_experience.php">Обратная связь с клиентом</a></li>
+<li><a href="https://blsspain-russia.com/moscow/additionalservices.php">Дополнительные услуги</a></li>
+<li><a href="https://blsspain-russia.com/moscow/public_holidays.php">Список праздников</a></li>
+<li><a href="https://blsspain-russia.com/moscow/useful_links.php">Полезные ссылки</a></li>
+<li><a href="https://blsspain-russia.com/moscow/security_rules.php">Правила безопасности</a></li>
+</ul></body></html>
